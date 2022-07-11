@@ -1,4 +1,7 @@
-
+function capitalize(string) {
+    string = string.charAt(0).toUpperCase() + string.slice(1)
+    return string
+}
 
 
 function getRandomInt(min, max) {
@@ -33,9 +36,9 @@ function generatePokemonCard(json) {
     const pokeTypes = document.createElement('p')
     const catchButton = document.createElement('button')
     catchButton.textContent = "Catch"
-    pokeName.innerText = json.species.name
+    pokeName.innerText = capitalize(json.species.name)
     pokeSprite.src = json.sprites.front_default
-    json.types[1] ? pokeTypes.textContent = `${json.types[0].type.name}, ${json.types[1].type.name}` : pokeTypes.textContent = json.types[0].type.name
+    json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(json.types[0].type.name)
     // pokeTypeOne.textContent = json.types[0].type.name
     // json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)

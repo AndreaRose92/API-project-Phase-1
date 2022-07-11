@@ -8,15 +8,13 @@ body {
     text-align: center;
     border: grey solid 2px;
     padding: 1rem;
-    width: 15rem;
-    height: 25rem;
     display: inline-grid;
     margin: 1rem 2rem;
     box-shadow: 4px 6px #000000
   }
 
   .sprite {
-    justify-content: center;
+    margin: auto;
     height: 250px;
     width: 250px;
 }
