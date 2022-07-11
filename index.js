@@ -39,8 +39,19 @@ function generatePokemonCard(json) {
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo, catchButton)
     pokeCard.className = "card"
+
+    catchButton.addEventListener( 'click', () => {
+        pokeCard.removeChild(catchButton)
+        const releaseButton = document.createElement('button')
+        releaseButton.textContent = 'Release'
+        pokeCard.append(releaseButton)
+        myTeam.append(pokeCard)
+    })
 }
 
 const btn = document.querySelector('button')
 
 btn.addEventListener('click', generateThreePokemon)
+
+const myTeam = document.querySelector('.myTeam')
+
