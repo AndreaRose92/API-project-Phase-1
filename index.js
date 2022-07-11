@@ -1,4 +1,7 @@
-
+function capitalize(string) {
+    string = string.charAt(0).toUpperCase() + string.slice(1)
+    return string
+}
 
 
 function getRandomInt(min, max) {
@@ -28,16 +31,18 @@ function generatePokemonCard(json) {
     const pokeCard = document.createElement('div')
     const pokeName = document.createElement('h2')
     const pokeSprite = document.createElement('img')
-    const pokeTypeOne = document.createElement('p')
-    const pokeTypeTwo = document.createElement('p')
+    // const pokeTypeOne = document.createElement('p')
+    // const pokeTypeTwo = document.createElement('p')
+    const pokeTypes = document.createElement('p')
     const catchButton = document.createElement('button')
     catchButton.textContent = "Catch"
-    pokeName.innerText = json.species.name
+    pokeName.innerText = capitalize(json.species.name)
     pokeSprite.src = json.sprites.front_default
-    pokeTypeOne.textContent = json.types[0].type.name
-    json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
+    json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(json.types[0].type.name)
+    // pokeTypeOne.textContent = json.types[0].type.name
+    // json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
-    pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo, catchButton)
+    pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
     pokeCard.className = "card"
 
     catchButton.addEventListener( 'click', () => {
