@@ -14,6 +14,8 @@ function generatePokemon()  {
         .then(json => generatePokemonCard(json))
 }
 function generateThreePokemon() {
+    const cardContainer = document.querySelector('.cardContainer')
+    cardContainer.innerHTML = ''
     for (i = 0; i < 3; i++) {
         generatePokemon()
     }
@@ -28,12 +30,14 @@ function generatePokemonCard(json) {
     const pokeSprite = document.createElement('img')
     const pokeTypeOne = document.createElement('p')
     const pokeTypeTwo = document.createElement('p')
+    const catchButton = document.createElement('button')
+    catchButton.textContent = "Catch"
     pokeName.innerText = json.species.name
     pokeSprite.src = json.sprites.front_default
     pokeTypeOne.textContent = json.types[0].type.name
     json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
-    pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo)
+    pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo, catchButton)
     pokeCard.className = "card"
 }
 
