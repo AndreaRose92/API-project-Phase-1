@@ -70,6 +70,7 @@ formPoke.addEventListener("submit", (event)=>{
     fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPoke}`)
     .then(r => r.json())
     .then(wantedPoke => generateSearchPokemonCard(wantedPoke))
+    formPoke.reset()
 } )
 
   function generateSearchPokemonCard (wantedPoke){
