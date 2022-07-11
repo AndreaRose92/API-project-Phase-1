@@ -60,3 +60,20 @@ btn.addEventListener('click', generateThreePokemon)
 
 const myTeam = document.querySelector('.myTeam')
 
+const formPoke = document.querySelector("#pokeSearchForm")
+// console.log(formPoke, "you clicked me")
+
+formPoke.addEventListener("submit", (event)=>{
+    event.preventDefault()
+    // console.log(event, "stop poking me!")
+    const wantedPoke = event.target.searchBox.value
+    fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPoke}`)
+    .then(r => r.json())
+    .then(wantedPoke => generateSearchPokemonCard(wantedPoke))
+} )
+
+  function generateSearchPokemonCard (wantedPoke){
+    const cardContainer = document.querySelector('.cardContainer')
+    cardContainer.innerHTML = ""
+    generatePokemonCard(wantedPoke)
+  }  
