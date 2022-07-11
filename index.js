@@ -37,7 +37,7 @@ function generatePokemonCard(json) {
     const catchButton = document.createElement('button')
     catchButton.textContent = "Catch"
     pokeName.innerText = capitalize(json.species.name)
-    pokeSprite.src = json.sprites.front_default
+    pokeSprite.src = json.sprites.other['official-artwork'].front_default
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(json.types[0].type.name)
     // pokeTypeOne.textContent = json.types[0].type.name
     // json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
