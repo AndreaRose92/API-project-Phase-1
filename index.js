@@ -1,3 +1,6 @@
+
+
+
 function getRandomInt(min, max) {
     min = Math.ceil(1)
     max = Math.floor(899)
@@ -8,15 +11,30 @@ function getRandomInt(min, max) {
 function generatePokemon()  {
     fetch(`https://pokeapi.co/api/v2/pokemon/${getRandomInt()}`)
         .then(r => r.json())
-        .then(console.log)
+        .then(json => generateThreePokemon(json))
 }
 
-function generateThreePokemon() {
-    for (i = 0; i < 4; i++) {
-         console.log(generatePokemon())
+function generateThreePokemon(json) {
+    for (i = 0; i < 3; i++) {
+        generatePokemonCard(json)
     }
 }
 
-generateThreePokemon()
 
-// build a card that displays Name, Type, Sprite, and a Save button
+
+function generatePokemonCard(json) {
+    const cardContainer = document.querySelector('.cardContainer')
+    const pokeCard = document.createElement('div')
+    const pokeName = document.createElement('h2')
+    const pokeSprite = document.createElement('img')
+    const pokeTypeOne = document.createElement('p')
+    const pokeTypeTwo = document.createElement('p')
+    pokeName.innerText = json.species.name
+    pokeSprite.src = json.sprites.front_default
+    pokeTypeOne.textContent = json.types[0].type.name
+    pokeTypeTwo.textContent = json.types[1].type.name
+    cardContainer.append(pokeCard)
+    pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo)
+}
+
+document.addEventListener('DOMContentLoaded', generatePokemon)
