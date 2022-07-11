@@ -34,6 +34,7 @@ function generatePokemonCard(json) {
     json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo)
+    pokeCard.className = "card"
 }
 
 const btn = document.querySelector('button')
