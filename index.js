@@ -46,11 +46,17 @@ function generatePokemonCard(json) {
     pokeCard.className = "card"
 
     catchButton.addEventListener( 'click', () => {
+        if (myTeam.childElementCount >= 5) {
+            myTeam.firstChild.remove()
+        }
         pokeCard.removeChild(catchButton)
         const releaseButton = document.createElement('button')
         releaseButton.textContent = 'Release'
         pokeCard.append(releaseButton)
         myTeam.append(pokeCard)
+        releaseButton.addEventListener('click', () => {
+            myTeam.removeChild(pokeCard)
+        })
     })
 }
 
