@@ -11,12 +11,11 @@ function getRandomInt(min, max) {
 function generatePokemon()  {
     fetch(`https://pokeapi.co/api/v2/pokemon/${getRandomInt()}`)
         .then(r => r.json())
-        .then(json => generateThreePokemon(json))
+        .then(json => generatePokemonCard(json))
 }
-
-function generateThreePokemon(json) {
+function generateThreePokemon() {
     for (i = 0; i < 3; i++) {
-        generatePokemonCard(json)
+        generatePokemon()
     }
 }
 
@@ -32,9 +31,11 @@ function generatePokemonCard(json) {
     pokeName.innerText = json.species.name
     pokeSprite.src = json.sprites.front_default
     pokeTypeOne.textContent = json.types[0].type.name
-    pokeTypeTwo.textContent = json.types[1].type.name
+    json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypeOne, pokeTypeTwo)
 }
 
-document.addEventListener('DOMContentLoaded', generatePokemon)
+const btn = document.querySelector('button')
+
+btn.addEventListener('click', generateThreePokemon)
