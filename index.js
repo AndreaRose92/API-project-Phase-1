@@ -12,12 +12,14 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min)
 }
 
-
+// fetch pokemon
 function generatePokemon()  {
     fetch(`${url}/${getRandomInt()}`)
         .then(r => r.json())
         .then(json => generatePokemonCard(json))
 }
+
+// putting 3 fetched pokemon on the DOM
 function generateThreePokemon() {
     const cardContainer = document.querySelector('.cardContainer')
     cardContainer.innerHTML = ''
@@ -27,22 +29,18 @@ function generateThreePokemon() {
 }
 
 
-
+// pulling data from the API and populating the pokeCards
 function generatePokemonCard(json) {
     const cardContainer = document.querySelector('.cardContainer')
     const pokeCard = document.createElement('div')
     const pokeName = document.createElement('h2')
     const pokeSprite = document.createElement('img')
-    // const pokeTypeOne = document.createElement('p')
-    // const pokeTypeTwo = document.createElement('p')
     const pokeTypes = document.createElement('p')
     const catchButton = document.createElement('button')
     catchButton.textContent = "I Choose You!"
     pokeName.innerText = capitalize(`${json.species.name}`)
     pokeSprite.src = `${json.sprites.other['official-artwork'].front_default}`
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
-    // pokeTypeOne.textContent = json.types[0].type.name
-    // json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
     pokeCard.className = "card"
@@ -63,7 +61,7 @@ function generatePokemonCard(json) {
     })
 }
 
-const btn = document.querySelector('button')
+const btn = document.querySelector('.pokeFetch')
 
 btn.addEventListener('click', generateThreePokemon)
 
@@ -75,7 +73,7 @@ const formPoke = document.querySelector("#pokeSearchForm")
 formPoke.addEventListener("submit", (event)=>{
     event.preventDefault()
     // console.log(event, "stop poking me!")
-    const wantedPoke = event.target.searchBox.value
+    const wantedPoke = event.target.searchBox.value.toLowerCase()
     fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPoke}`)
     .then(r => r.json())
     .then(wantedPoke => generateSearchPokemonCard(wantedPoke))
@@ -91,24 +89,30 @@ formPoke.addEventListener("submit", (event)=>{
 
 let starterArray = []
 
+// functions to fetch the starter pokemon
 function getBulbasaur() {
     fetch(`${url}/1`)
         .then(r => r.json())
         .then(json => {starterArray[0]=json})
     starterArray    
 }
+
 function getCharmander() {
     fetch(`${url}/4`)
         .then(r => r.json())
         .then(json => {starterArray[1]=json})
 }
+
 function getSquirtle() {
     fetch(`${url}/7`)
         .then(r => r.json())
         .then(json => {starterArray[2]=json})
 }
 
+// pushing starters into an array
 function getStarters() {
+    const cardContainer = document.querySelector('.cardContainer')
+    cardContainer.innerHTML = ''
     getBulbasaur()
     getCharmander()
     getSquirtle()
@@ -116,12 +120,5 @@ function getStarters() {
     })
 }
 
-
-// function starterCards(starterArray){
-
-//     starterArray.forEach(starterObj => {
-//         generatePokemonCard(starterObj)
-//     })
-// }
-
-document.addEventListener('DOMContentLoaded', getStarters)
+const starterBtn = document.getElementsByClassName('starterFetch')
+starterBtn.addEventListener('click', getStarters)
