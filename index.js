@@ -1,3 +1,5 @@
+const url = "https://pokeapi.co/api/v2/pokemon"
+
 function capitalize(string) {
     string = string.charAt(0).toUpperCase() + string.slice(1)
     return string
@@ -12,7 +14,7 @@ function getRandomInt(min, max) {
 
 
 function generatePokemon()  {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${getRandomInt()}`)
+    fetch(`${url}/${getRandomInt()}`)
         .then(r => r.json())
         .then(json => generatePokemonCard(json))
 }
@@ -35,10 +37,10 @@ function generatePokemonCard(json) {
     // const pokeTypeTwo = document.createElement('p')
     const pokeTypes = document.createElement('p')
     const catchButton = document.createElement('button')
-    catchButton.textContent = "Catch"
-    pokeName.innerText = capitalize(json.species.name)
-    pokeSprite.src = json.sprites.other['official-artwork'].front_default
-    json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(json.types[0].type.name)
+    catchButton.textContent = "I Choose You!"
+    pokeName.innerText = capitalize(`${json.species.name}`)
+    pokeSprite.src = `${json.sprites.other['official-artwork'].front_default}`
+    json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
     // pokeTypeOne.textContent = json.types[0].type.name
     // json.types[1] ? pokeTypeTwo.textContent = json.types[1].type.name : pokeTypeTwo.innerHTML = ''
     cardContainer.append(pokeCard)
@@ -57,6 +59,7 @@ function generatePokemonCard(json) {
         releaseButton.addEventListener('click', () => {
             myTeam.removeChild(pokeCard)
         })
+        cardContainer.innerHTML = ''
     })
 }
 
@@ -84,3 +87,41 @@ formPoke.addEventListener("submit", (event)=>{
     cardContainer.innerHTML = ""
     generatePokemonCard(wantedPoke)
   }  
+
+
+let starterArray = []
+
+function getBulbasaur() {
+    fetch(`${url}/1`)
+        .then(r => r.json())
+        .then(json => {starterArray[0]=json})
+    starterArray    
+}
+function getCharmander() {
+    fetch(`${url}/4`)
+        .then(r => r.json())
+        .then(json => {starterArray[1]=json})
+}
+function getSquirtle() {
+    fetch(`${url}/7`)
+        .then(r => r.json())
+        .then(json => {starterArray[2]=json})
+}
+
+function getStarters() {
+    getBulbasaur()
+    getCharmander()
+    getSquirtle()
+    starterArray.forEach(starterObj=>{generatePokemonCard(starterObj)  
+    })
+}
+
+
+// function starterCards(starterArray){
+
+//     starterArray.forEach(starterObj => {
+//         generatePokemonCard(starterObj)
+//     })
+// }
+
+document.addEventListener('DOMContentLoaded', getStarters)
