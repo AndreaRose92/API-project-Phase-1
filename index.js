@@ -1,5 +1,11 @@
 const url = "https://pokeapi.co/api/v2/pokemon"
 const cardContainer = document.querySelector('.cardContainer')
+const grassStarterIDs = [1, 152, 252, 387, 495, 650, 722, 810]
+const fireStarterIDs = [4, 155, 255, 390, 498, 653, 725, 813]
+const waterStarterIDs = [7, 158, 258, 393, 501, 656, 728, 816]
+const regularStarterIDs = [grassStarterIDs, fireStarterIDs, waterStarterIDs]
+
+
 
 function capitalize(string) {
     string = string.charAt(0).toUpperCase() + string.slice(1)
@@ -94,39 +100,49 @@ formPoke.addEventListener("submit", (event)=>{
   }  
 
 
-let starterArray = []
+let starterIDsArray = []
 
 // functions to fetch the starter pokemon
-function getBulbasaur() {
-    fetch(`${url}/1`)
-        .then(r => r.json())
-        .then(json => {starterArray[0]=json})
-    starterArray    
-}
+// function getBulbasaur() {
+//     fetch(`${url}/1`)
+//         .then(r => r.json())
+//         .then(json => {starterArray[0]=json})
+//     starterArray    
+// }
 
-function getCharmander() {
-    fetch(`${url}/4`)
-        .then(r => r.json())
-        .then(json => {starterArray[1]=json})
-}
+// function getCharmander() {
+//     fetch(`${url}/4`)
+//         .then(r => r.json())
+//         .then(json => {starterArray[1]=json})
+// }
 
-function getSquirtle() {
-    fetch(`${url}/7`)
-        .then(r => r.json())
-        .then(json => {starterArray[2]=json})
-}
+// function getSquirtle() {
+//     fetch(`${url}/7`)
+//         .then(r => r.json())
+//         .then(json => {starterArray[2]=json})
+// }
 
+function randomIDs(array) {
+    return array[Math.floor(Math.random()*array.length)]
+}
 // pushing starters into an array and making cards
 function getStarters() {
-   
-    getBulbasaur()
-    getCharmander()
-    getSquirtle()
+    if (Math.floor(Math.random()*20)+1 === 20) {
+        fetch(`https://pokeapi.co/api/v2/pokemon/25`).then(r=>r.json()).then(json=>starterIDsArray.push(json))
+        fetch(`https://pokeapi.co/api/v2/pokemon/133`).then(r=>r.json()).then(json=>starterIDsArray.push(json))
+    } else {
+
+        regularStarterIDs.forEach(starterArray => {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${randomIDs(starterArray)}`)
+                .then(r=>r.json())
+                .then(json=>starterIDsArray.push(json))
+        })
+    }
 }
 function starterCards() {
     const cardContainer = document.querySelector('.cardContainer')
     cardContainer.innerHTML = ''
-    starterArray.forEach(starterObj=>{generatePokemonCard(starterObj)  
+    starterIDsArray.forEach(starterObj=>{generatePokemonCard(starterObj)  
     })
 }
 
