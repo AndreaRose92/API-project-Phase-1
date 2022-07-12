@@ -9,13 +9,13 @@
     <button class="starterFetch">Choose a Starter!</button>
     <button class="pokeFetch">Get Random Pokemon</button>
     <div class="cardContainer"></div>
-    <div class="pokedex">
-
+    <div class="formContainer">
+        <p>Looking for a particular Pokemon? Search the area for one here:</p>
+        <form id="pokeSearchForm" >
+            <input type="text" placeholder="pokemon name or ID" name="searchBox"/>
+            <input value="Catch" type="submit"/>
+        </form>
     </div>
-    <form id="pokeSearchForm" >
-        <input type="text" placeholder="pokemon name" name="searchBox"/>
-        <input value="Catch" type="submit"/>
-    </form>
     <div class="myTeam">My Team:</div>
     <script src="index.js"></script>
 </body>

@@ -69,19 +69,27 @@ const myTeam = document.querySelector('.myTeam')
 
 const formPoke = document.querySelector("#pokeSearchForm")
 // console.log(formPoke, "you clicked me")
+const cardContainer = document.querySelector('.cardContainer')
 
 formPoke.addEventListener("submit", (event)=>{
     event.preventDefault()
     // console.log(event, "stop poking me!")
     const wantedPoke = event.target.searchBox.value.toLowerCase()
     fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPoke}`)
-    .then(r => r.json())
-    .then(wantedPoke => generateSearchPokemonCard(wantedPoke))
+        .then(r => { 
+            console.log(r)
+            if (r.ok) {
+                r.json().then(wantedPoke => generateSearchPokemonCard(wantedPoke))
+            } else {
+                cardContainer.innerText= "This species of Pokemon hasn't been discovered yet! Try again!"
+            }
+            
+        })
     formPoke.reset()
 } )
 
   function generateSearchPokemonCard (wantedPoke){
-    const cardContainer = document.querySelector('.cardContainer')
+    
     cardContainer.innerHTML = ""
     generatePokemonCard(wantedPoke)
   }  
@@ -120,5 +128,9 @@ function getStarters() {
     })
 }
 
+<<<<<<< HEAD
 const starterBtn = document.getElementsByClassName('starterFetch')
 starterBtn.addEventListener('click', getStarters)
+=======
+document.addEventListener('DOMContentLoaded', getStarters)
+>>>>>>> main
