@@ -132,5 +132,10 @@ function starterCards() {
 
 document.addEventListener('DOMContentLoaded', getStarters)
 const starterBtn = document.querySelector('.starterFetch')
-starterBtn.addEventListener('click', starterCards)
+starterBtn.addEventListener('click', () => {
+    starterBtn.style.display = "none"
+    alert("Choose Wisely! You only get one!")
+    starterCards()
+    btn.style.display = ""
+})
 
