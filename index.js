@@ -1,4 +1,5 @@
 const url = "https://pokeapi.co/api/v2/pokemon"
+const cardContainer = document.querySelector('.cardContainer')
 
 function capitalize(string) {
     string = string.charAt(0).toUpperCase() + string.slice(1)
@@ -31,7 +32,6 @@ function generateThreePokemon() {
 
 // pulling data from the API and populating the pokeCards
 function generatePokemonCard(json) {
-    const cardContainer = document.querySelector('.cardContainer')
     const pokeCard = document.createElement('div')
     const pokeName = document.createElement('h2')
     const pokeSprite = document.createElement('img')
@@ -70,15 +70,22 @@ const myTeam = document.querySelector('.myTeam')
 const formPoke = document.querySelector("#pokeSearchForm")
 // console.log(formPoke, "you clicked me")
 
+
 formPoke.addEventListener("submit", (event)=>{
     event.preventDefault()
     // console.log(event, "stop poking me!")
     const wantedPoke = event.target.searchBox.value.toLowerCase()
     fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPoke}`)
-    .then(r => r.json())
-    .then(wantedPoke => generateSearchPokemonCard(wantedPoke))
+    .then(r => {
+        if (r.ok) {
+            r.json().then(wantedPoke=>generateSearchPokemonCard(wantedPoke))
+        } else {
+            cardContainer.innerText="This species of Pokemon hasn't been discovered yet! Try again!"
+        }
+        })
+    },
     formPoke.reset()
-} )
+)
 
   function generateSearchPokemonCard (wantedPoke){
     const cardContainer = document.querySelector('.cardContainer')
