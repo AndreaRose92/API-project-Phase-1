@@ -4,8 +4,7 @@ const grassStarterIDs = [1, 152, 252, 387, 495, 650, 722, 810]
 const fireStarterIDs = [4, 155, 255, 390, 498, 653, 725, 813]
 const waterStarterIDs = [7, 158, 258, 393, 501, 656, 728, 816]
 const regularStarterIDs = [grassStarterIDs, fireStarterIDs, waterStarterIDs]
-
-
+let pokeSpriteSource
 
 function capitalize(string) {
     string = string.charAt(0).toUpperCase() + string.slice(1)
@@ -17,6 +16,28 @@ function getRandomInt(min, max) {
     min = Math.ceil(1)
     max = Math.floor(899)
     return Math.floor(Math.random() * (max - min) + min)
+}
+
+
+function pickPokeSprite(json) {
+    let randNum = (Math.floor(Math.random()*500))
+    switch (randNum) {
+        case 500:
+            pokeSpriteSource = json.sprites.front_shiny
+            break;
+        case (499, json.sprites.front_female_shiny === true):
+            pokeSpriteSource = json.sprites.front_female_shiny
+            break;
+        case (499, json.sprites.front_female_shiny === false):
+            pokeSpriteSource = json.sprites.front_shiny
+            break;
+        case (randNum > 248, json.sprites.front_female === true):
+            pokeSpriteSource = json.sprites.front_female
+            break;
+        default:
+            pokeSpriteSource = json.sprites.front_default
+    }
+    return pokeSpriteSource
 }
 
 // fetch pokemon
@@ -45,11 +66,11 @@ function generatePokemonCard(json) {
     const catchButton = document.createElement('button')
     catchButton.textContent = "I Choose You!"
     pokeName.innerText = capitalize(`${json.species.name}`)
-    pokeSprite.src = `${json.sprites.other['official-artwork'].front_default}`
+    pokeSprite.src = `${pickPokeSprite(json)}`
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
-    pokeCard.className = "card"
+    pokeCard.className = `card ${json.types[0].type.name}`
 
     catchButton.addEventListener( 'click', () => {
         if (myTeam.childElementCount >= 5) {
@@ -89,8 +110,8 @@ formPoke.addEventListener("submit", (event)=>{
             cardContainer.innerText="This species of Pokemon hasn't been discovered yet! Try again!"
         }
         })
-    },
-    formPoke.reset()
+        formPoke.reset()
+    }
 )
 
   function generateSearchPokemonCard (wantedPoke){
@@ -146,7 +167,10 @@ function starterCards() {
     })
 }
 
-document.addEventListener('DOMContentLoaded', getStarters)
+const init = () => {getStarters()}
+
+
+document.addEventListener('DOMContentLoaded', init)
 const starterBtn = document.querySelector('.starterFetch')
 starterBtn.addEventListener('click', () => {
     starterBtn.style.display = "none"
