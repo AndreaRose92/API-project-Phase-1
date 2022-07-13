@@ -4,42 +4,68 @@ body {
     margin: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* grid-template-rows: .33fr 1fr 1fr; */
-    gap: 50px;
+    grid-template-rows: .33fr 1fr 1fr;
+    gap: 30px;
 }
 
 * {
-    border: #000000 2px 3px;
+    border: solid #000000 4px 6px;
     /* background-color: wheat; */
     border-radius: 20px;
     justify-self: center;
     text-align: center;
 }
 
+h1 {
+    border: solid #000000 .2rem;
+    padding: 5px;
+    background-color: whitesmoke;
+    background-size: fit-content;
+}
+
+h2 {
+    border: solid #000000 .2rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* width:50%; */
+    padding: 5px;
+    background-color: whitesmoke;
+    background-size: fit-content;
+}
+
+.submit {
+    margin: 5px;
+}
+
+.formContainer {
+    height: 70%;
+    grid-column: 2;
+    grid-row: 2;
+}
+
 .header {
-    height: 10%;
+    height: 20%;
     margin-top: 10px;
     grid-column: 1;
-    /* grid-row: 1; */
-    /* margin-left: auto; */
+    grid-row: 1;
 }
 
 .pokeGenerator {
-    height: 30%;
+    height: 70%;
     grid-column: 1;
-    /* grid-row: 2; */
+    grid-row: 2;
 }
 
 .pokeDex {
     height: 70%;
     grid-column: 2;
-    /* grid-row: 2 / 3; */
+    grid-row: 3;
 }
 
 .teamContainer {
     height: 40%;
     grid-column: 1;
-    /* grid-row: 3; */
+    grid-row: 3;
 }
 
 .myTeam {
@@ -53,7 +79,7 @@ body {
 
 .starterFetch,
 .pokeFetch {
-    width: 25%;
+    width: 40%;
 }
 
 #name,
