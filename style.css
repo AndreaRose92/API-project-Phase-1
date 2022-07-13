@@ -1,43 +1,48 @@
 body {
+    font-family: Arial, Helvetica, sans-serif;
     background-color: thistle;
     margin: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: .33fr 1fr 1fr; */
+    gap: 50px;
+}
+
+* {
+    border: #000000 2px 3px;
+    /* background-color: wheat; */
+    border-radius: 20px;
     justify-self: center;
+    text-align: center;
 }
 
-button {
-    border-radius: 20px;
+.header {
+    height: 10%;
+    margin-top: 10px;
+    grid-column: 1;
+    /* grid-row: 1; */
+    /* margin-left: auto; */
 }
 
-td {
-    width: 75%;
-    justify-self: center;
-    /* background-color: wheat;     */
-    border-radius: 20px;
+.pokeGenerator {
+    height: 30%;
+    grid-column: 1;
+    /* grid-row: 2; */
 }
 
-h1 {
-    background-color: wheat;
-    border: #000000 2px 2px;
-    border-radius: 20px;
-    margin-left: 23%;
-    width: fit-content;
-    padding: 1rem;
+.pokeDex {
+    height: 70%;
+    grid-column: 2;
+    /* grid-row: 2 / 3; */
 }
 
-h2 {
-    background-color: wheat;
-    border: #000000 2px 2px;
-    border-radius: 20px;
-    margin-left: 21.8%;
-    width: fit-content;
-    padding: 1rem;
+.teamContainer {
+    height: 40%;
+    grid-column: 1;
+    /* grid-row: 3; */
 }
 
 .myTeam {
-    float: left;
-    margin-left: 15%;
     display: grid;
     gap: 5px;
     grid-auto-flow: row;
@@ -48,88 +53,64 @@ h2 {
 
 .starterFetch,
 .pokeFetch {
-    margin-left: 15%;
     width: 25%;
-}
-
-.formContainer {
-    margin-left: 15%;
-    align-content: center;
 }
 
 #name,
 #moveset {
     border: #000000 2px;
-    border-radius: 20px;
     background-color: whitesmoke;
     margin: 1px;
 }
 
 .move {
-    border-radius: 20px;
     background-color: whitesmoke;
     border: #000000 2px;
     margin: 1px;
 }
 
 .pokeDex {
-    /* display: none; */
     background-color: wheat;
-    margin-right: 20%;
-    float: right;
-    text-align: center;
     width: 45%;
-    max-width: 420px;
     border: 2px solid grey;
     padding: 2px;
-    border-radius: 20px;
 }
 
 
 
 .cardContainer {
-    margin-left: 15%;
-    width: 45%;
-    /* justify-content: center; */
+    background-image: url(https://pokemonrevolution.net/forum/uploads/monthly_2019_10/d843fov-5ad2d436-789b-48f4-91ac-7a553ca26306.png.3c7185d83015a14741e5cf34bdae8c99.png);
+    background-repeat: none;
+    background-size: cover;
+    display: inline-flex;
+    /* width: 45%; */
+    /* grid-template-columns: 1fr 1fr 1fr; */
 }
 
 
-.card {
-    align-self: auto;
-    text-align: center;
+.card,
+.teamCard {
     border: grey solid 2px;
-    display: inline-block;
     padding: 0.5rem;
     margin: 1rem 2rem;
     box-shadow: 4px 6px #000000;
-    border-radius: 20px;
-    width: 200px;
+    width: auto;
     height: auto;
 }
 
 .release {
-    text-align: center;
-    /* float: right; */
     width: 70%;
-    /* margin: 1rem; */
-    /* padding-right: 1rem; */
     box-shadow: #000000 1px 2px;
 }
 
 .info {
-
-    /* float: left; */
     width: 70%;
-    /* margin: 1rem; */
-    /* padding-left: 1rem; */
     box-shadow: #000000 1px 2px;
-    text-align: center;
 }
 
 .sprite {
-    /* margin: auto; */
-    height: 200px;
-    width: 200px;
+    height: auto;
+    width: auto;
 }
 
 .ballSprite {
@@ -140,71 +121,54 @@ h2 {
 .normal {
     background-color: #A8A878;
 }
-
 .fire {
     background-color: #F08030;
 }
-
 .fighting {
     background-color: #C03028;
 }
-
 .water {
     background-color: #6890F0;
 }
-
 .flying {
     background-color: #A890F0;
 }
-
 .grass {
     background-color: #78C850;
 }
-
 .poison {
     background-color: #A040A0;
 }
-
 .electric {
     background: #F8D030;
 }
-
 .ground {
     background-color: #E0C068;
 }
-
 .psychic {
     background-color: #F85888;
 }
-
 .rock {
     background-color: #B8A038;
 }
-
 .ice {
     background-color: #638D8D;
 }
-
 .bug {
     background-color: #A8B820;
 }
-
 .dragon {
     background-color: #4924A1;
 }
-
 .ghost {
     background-color: #705898;
 }
-
 .dark {
     background-color: #705848;
 }
-
 .steel {
     background-color: #787887;
 }
-
 .fairy {
     background-color: #9B6470;
 }
