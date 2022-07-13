@@ -58,7 +58,6 @@ function generatePokemon()  {
 
 // putting 3 fetched pokemon on the DOM
 function generateThreePokemon() {
-    const cardContainer = document.querySelector('.cardContainer')
     cardContainer.innerHTML = ''
     for (i = 0; i < 3; i++) {
         generatePokemon()
@@ -151,7 +150,6 @@ formPoke.addEventListener("submit", (event)=>{
 )
 
   function generateSearchPokemonCard (wantedPoke){
-    const cardContainer = document.querySelector('.cardContainer')
     cardContainer.innerHTML = ""
     generatePokemonCard(wantedPoke)
   }  
@@ -176,7 +174,6 @@ function getStarters() {
     }
 }
 function starterCards() {
-    const cardContainer = document.querySelector('.cardContainer')
     cardContainer.innerHTML = ''
     starterIDsArray.forEach(starterObj=>{generatePokemonCard(starterObj)  
     })
