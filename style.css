@@ -10,24 +10,26 @@ body {
 
 * {
     border: solid #000000 4px 6px;
-    /* background-color: wheat; */
     border-radius: 20px;
     justify-self: center;
     text-align: center;
 }
 
 h1 {
+    margin-left: auto;
+    margin-right: auto;
     border: solid #000000 .2rem;
     padding: 5px;
     background-color: whitesmoke;
     background-size: fit-content;
+    width: fit-content;
 }
 
 h2 {
     border: solid #000000 .2rem;
     margin-left: auto;
     margin-right: auto;
-    /* width:50%; */
+    width: fit-content;
     padding: 5px;
     background-color: whitesmoke;
     background-size: fit-content;
