@@ -1,12 +1,96 @@
 body {
+    background-color: thistle;
+    margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
     display: block;
     justify-self: center;
 }
 
+button {
+    border-radius: 20px;
+}
+
+td {
+    width: 75%;
+    justify-self: center;
+    /* background-color: wheat;     */
+    border-radius: 20px;
+}
+
+h1 {
+    background-color: wheat;
+    border: #000000 2px 2px;
+    border-radius: 20px;
+    margin-left: 23%;
+    width: fit-content;
+    padding: 1rem;
+}
+
+h2 {
+    background-color: wheat;
+    border: #000000 2px 2px;
+    border-radius: 20px;
+    margin-left: 21.8%;
+    width: fit-content;
+    padding: 1rem;
+}
+
+.myTeam {
+    float: left;
+    margin-left: 15%;
+    display: grid;
+    gap: 5px;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-start: auto;
+}
+
+.starterFetch,
+.pokeFetch {
+    margin-left: 15%;
+    width: 25%;
+}
+
+.formContainer {
+    margin-left: 15%;
+    align-content: center;
+}
+
+#name,
+#moveset {
+    border: #000000 2px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    margin: 1px;
+}
+
+.move {
+    border-radius: 20px;
+    background-color: whitesmoke;
+    border: #000000 2px;
+    margin: 1px;
+}
+
+.pokeDex {
+    /* display: none; */
+    background-color: wheat;
+    margin-right: 20%;
+    float: right;
+    text-align: center;
+    width: 45%;
+    max-width: 420px;
+    border: 2px solid grey;
+    padding: 2px;
+    border-radius: 20px;
+}
+
+
 
 .cardContainer {
-    justify-content: center;
+    margin-left: 15%;
+    width: 45%;
+    /* justify-content: center; */
 }
 
 
@@ -15,15 +99,37 @@ body {
     text-align: center;
     border: grey solid 2px;
     display: inline-block;
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 1rem 2rem;
-    box-shadow: 4px 6px #000000
-  }
+    box-shadow: 4px 6px #000000;
+    border-radius: 20px;
+    width: 200px;
+    height: auto;
+}
 
-  .sprite {
-    margin: auto;
-    height: 250px;
-    width: 250px;
+.release {
+    text-align: center;
+    /* float: right; */
+    width: 70%;
+    /* margin: 1rem; */
+    /* padding-right: 1rem; */
+    box-shadow: #000000 1px 2px;
+}
+
+.info {
+
+    /* float: left; */
+    width: 70%;
+    /* margin: 1rem; */
+    /* padding-left: 1rem; */
+    box-shadow: #000000 1px 2px;
+    text-align: center;
+}
+
+.sprite {
+    /* margin: auto; */
+    height: 200px;
+    width: 200px;
 }
 
 .normal {

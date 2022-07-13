@@ -1,10 +1,19 @@
 const url = "https://pokeapi.co/api/v2/pokemon"
+const pokedex = document.querySelector('.pokeDex')
+const dexName = document.querySelector('#name')
+const dexImage = document.querySelector('.dexImage')
+const moveOne = document.getElementById('1')
+const moveTwo = document.getElementById('2')
+const moveThree = document.getElementById('3')
+const moveFour = document.getElementById('4')
 const cardContainer = document.querySelector('.cardContainer')
 const grassStarterIDs = [1, 152, 252, 387, 495, 650, 722, 810]
 const fireStarterIDs = [4, 155, 255, 390, 498, 653, 725, 813]
 const waterStarterIDs = [7, 158, 258, 393, 501, 656, 728, 816]
 const regularStarterIDs = [grassStarterIDs, fireStarterIDs, waterStarterIDs]
 let pokeSpriteSource
+let localPokemonArray = []
+let starterIDsArray = []
 
 function capitalize(string) {
     string = string.charAt(0).toUpperCase() + string.slice(1)
@@ -56,36 +65,62 @@ function generateThreePokemon() {
     }
 }
 
+function randomMove(json) {
+    let randNum = (Math.floor(Math.random()*json.moves.length))
+    return json.moves[randNum].move.name
+}
+
+function displayDexEntry(json) {
+    dexImage.innerHTML = ""
+    const pokedexSprite = document.createElement('img')
+    pokedex.className = `pokeDex ${json.types[0].type.name}`
+    dexName.innerText = `#${json.id}: ${capitalize(json.species.name)}`
+    dexImage.appendChild(pokedexSprite)
+    pokedexSprite.src = json.sprites.other['official-artwork'].front_default
+    moveOne.textContent = `${capitalize(randomMove(json))}`
+    moveTwo.textContent = `${capitalize(randomMove(json))}`
+    moveThree.textContent = `${capitalize(randomMove(json))}`
+    moveFour.textContent = `${capitalize(randomMove(json))}`
+}
 
 // pulling data from the API and populating the pokeCards
 function generatePokemonCard(json) {
     const pokeCard = document.createElement('div')
-    const pokeName = document.createElement('h2')
+    const pokeName = document.createElement('h3')
     const pokeSprite = document.createElement('img')
     const pokeTypes = document.createElement('p')
     const catchButton = document.createElement('button')
     catchButton.textContent = "I Choose You!"
     pokeName.innerText = capitalize(`${json.species.name}`)
     pokeSprite.src = `${pickPokeSprite(json)}`
+    pokeSprite.className = "sprite"
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
     cardContainer.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
     pokeCard.className = `card ${json.types[0].type.name}`
 
     catchButton.addEventListener( 'click', () => {
-        if (myTeam.childElementCount >= 5) {
+        if (myTeam.childElementCount >= 6) {
             myTeam.firstChild.remove()
         }
         pokeCard.removeChild(catchButton)
+        pokeCard.removeChild(pokeSprite)
+        const pokeDexBtn = document.createElement('button')
+        pokeDexBtn.className = "info"
+        pokeDexBtn.textContent = "PokeDex"
+        pokeCard.append(pokeDexBtn)
         const releaseButton = document.createElement('button')
+        releaseButton.className = 'release'
         releaseButton.textContent = 'Release'
         pokeCard.append(releaseButton)
         myTeam.append(pokeCard)
+        pokeDexBtn.addEventListener('click', () => displayDexEntry(json))
         releaseButton.addEventListener('click', () => {
             myTeam.removeChild(pokeCard)
         })
         cardContainer.innerHTML = ''
     })
+
 }
 
 const btn = document.querySelector('.pokeFetch')
@@ -121,27 +156,6 @@ formPoke.addEventListener("submit", (event)=>{
   }  
 
 
-let starterIDsArray = []
-
-// functions to fetch the starter pokemon
-// function getBulbasaur() {
-//     fetch(`${url}/1`)
-//         .then(r => r.json())
-//         .then(json => {starterArray[0]=json})
-//     starterArray    
-// }
-
-// function getCharmander() {
-//     fetch(`${url}/4`)
-//         .then(r => r.json())
-//         .then(json => {starterArray[1]=json})
-// }
-
-// function getSquirtle() {
-//     fetch(`${url}/7`)
-//         .then(r => r.json())
-//         .then(json => {starterArray[2]=json})
-// }
 
 function randomIDs(array) {
     return array[Math.floor(Math.random()*array.length)]

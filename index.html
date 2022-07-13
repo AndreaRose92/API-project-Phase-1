@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <head>
     <title>Pokemon Fetcher</title>
-
     <!-- <script defer src="alt.js"></script> -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <h2>Pokemon Finder</h2>
     <button class="starterFetch">Choose a Starter!</button>
     <button style="display: none;" class="pokeFetch">Wild Pokemon Appear!</button>
     <div class="cardContainer"></div>
+    <table class="pokeDex">
+        <tbody>
+            <tr>
+                <th id='name' colspan="2">PokeDex</th>
+            </tr>
+            <tr>
+                <td class="dexImage" colspan="2">
+                    <img src="https://archives.bulbagarden.net/media/upload/archive/3/37/20160408130706%21RG_Pok%C3%A9dex.png"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="moveset" colspan="2">Move Set</td>
+            </tr>
+            <tr>
+                <td id="1" class="move">Move #1</td>
+                <td id="2" class="move">Move #2</td>
+            </tr>
+            <tr>
+                <td id="3" class="move">Move #3</td>
+                <td id="4" class="move">Move #4</td>
+            </tr>
+        </tbody>
+    </table>
     <div class="formContainer">
         <p>Looking for a particular Pokemon? Search the area for one here:</p>
         <form id="pokeSearchForm" >
@@ -16,6 +39,8 @@
             <input value="Catch" type="submit"/>
         </form>
     </div>
-    <div class="myTeam">My Team:</div>
+    <h1>My Team</h1>
+    <br>
+    <div class="myTeam"></div>
     <script src="index.js"></script>
 </body>
