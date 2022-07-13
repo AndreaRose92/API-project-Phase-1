@@ -132,6 +132,11 @@ h2 {
     width: 200px;
 }
 
+.ballSprite {
+    height: 50px;
+    width: 50px;
+}
+
 .normal {
     background-color: #A8A878;
 }

@@ -104,7 +104,8 @@ function generatePokemonCard(json) {
             myTeam.firstChild.remove()
         }
         pokeCard.removeChild(catchButton)
-        pokeCard.removeChild(pokeSprite)
+        pokeSprite.className = "ballSprite"
+        pokeSprite.src = 'https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'
         const pokeDexBtn = document.createElement('button')
         pokeDexBtn.className = "info"
         pokeDexBtn.textContent = "PokeDex"
