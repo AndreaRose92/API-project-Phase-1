@@ -23,7 +23,7 @@ function capitalize(string) {
 
 function getRandomInt(min, max) {
     min = Math.ceil(1)
-    max = Math.floor(899)
+    max = Math.floor(906)
     return Math.floor(Math.random() * (max - min) + min)
 }
 
@@ -102,7 +102,9 @@ function generatePokemonCard(json) {
         if (myTeam.childElementCount >= 6) {
             myTeam.firstChild.remove()
         }
+        pokeCard.className = `teamCard ${json.types[0].type.name}`    
         pokeCard.removeChild(catchButton)
+        pokeCard.removeChild(pokeTypes)
         pokeSprite.className = "ballSprite"
         pokeSprite.src = 'https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'
         const pokeDexBtn = document.createElement('button')
@@ -191,3 +193,4 @@ starterBtn.addEventListener('click', () => {
     btn.style.display = ""
 })
 
+const teamCard = document.querySelector('.teamCard')
