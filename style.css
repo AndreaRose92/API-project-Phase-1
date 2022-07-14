@@ -144,7 +144,9 @@ h1, h2 {
     }
 
 
+
 .card {
+    position: static;
     border: grey solid 2px;
     padding: 0.5rem;
     margin: 1rem 2rem;
