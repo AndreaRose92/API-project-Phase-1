@@ -9,46 +9,55 @@
     <div class="header">
         <h1>Pokemon Fetcher</h1>
     </div>
-    <div class="pokeGenerator">
-        <h2>Pokemon Finder</h2>
-        <button class="starterFetch">Choose a Starter!</button>
-        <button style="display: none;" class="pokeFetch">Wild Pokemon Appear!</button>
-        <div class="cardContainer"></div>
-    </div>
-    <div class="formContainer">
-        <p>Looking for a particular Pokemon? Search the area for one here:</p>
-        <form id="pokeSearchForm" >
-            <input type="text" placeholder="pokemon name or ID" name="searchBox"/><br>
-            <input class="submit" value="Catch" type="submit"/>
-        </form>
-    </div>
-    <table class="pokeDex">
-        <tbody>
-            <tr>
-                <th id='name' colspan="2">PokeDex</th>
-            </tr>
-            <tr>
-                <td class="dexImage" colspan="2">
-                    <img src='https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'/>
-                </td>
-            </tr>
-            <tr>
-                <td id="moveset" colspan="2">Move Set</td>
-            </tr>
-            <tr>
-                <td id="1" class="move">Move #1</td>
-                <td id="2" class="move">Move #2</td>
-            </tr>
-            <tr>
-                <td id="3" class="move">Move #3</td>
-                <td id="4" class="move">Move #4</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="teamContainer">    
-        <h1>My Team</h1>
-        <!-- <br> -->
-        <div class="myTeam"></div>
+    <div class="wrapper">
+        <div class="pokeGenerator">
+            <h2>Pokemon Finder</h2>
+            <!-- <button class="starterFetch">Choose a Starter!</button> -->
+            <div class="starterFetch">
+                <p id="starter">Choose a Starter!</p>
+            </div>
+            <button style="display: none;" class="pokeFetch">Search the Tall Grass</button>
+            <div class="cardContainer">
+                <div class="pokeCardField"></div>
+            </div>
+        </div>
+        <h2 class="formTitle" style="display: none;">Looking for a specific Pokemon?</h2>
+        <div class="formContainer">
+            <p>Looking for a particular Pokemon? Search the area for one here:</p>
+            <form id="pokeSearchForm" >
+                <input type="text" placeholder="pokemon name or ID" name="searchBox"/><br>
+                <input class="submit" value="Catch" type="submit"/>
+            </form>
+        </div>
+        <table class="pokeDex">
+            <tbody>
+                <tr>
+                    <th id='name' colspan="2">PokeDex</th>
+                </tr>
+                <tr>
+                    <td class="dexImage" colspan="2">
+                        <img src='https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png' title="Click to find more Pokemon!"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="moveset" colspan="2">Move Set</td>
+                </tr>
+                <tr>
+                    <td id="1" class="move">Move #1</td>
+                    <td id="2" class="move">Move #2</td>
+                </tr>
+                <tr>
+                    <td id="3" class="move">Move #3</td>
+                    <td id="4" class="move">Move #4</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="teamContainer">    
+            <h2>My Team</h2>
+            <!-- <br> -->
+            <div class="myTeam">
+            </div>
+        </div>
     </div>
     <script src="index.js"></script>
 </body>

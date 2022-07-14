@@ -7,6 +7,7 @@ const moveTwo = document.getElementById('2')
 const moveThree = document.getElementById('3')
 const moveFour = document.getElementById('4')
 const cardContainer = document.querySelector('.cardContainer')
+const cardField = document.querySelector('.pokeCardField')
 const grassStarterIDs = [1, 152, 252, 387, 495, 650, 722, 810]
 const fireStarterIDs = [4, 155, 255, 390, 498, 653, 725, 813]
 const waterStarterIDs = [7, 158, 258, 393, 501, 656, 728, 816]
@@ -58,7 +59,8 @@ function generatePokemon()  {
 
 // putting 3 fetched pokemon on the DOM
 function generateThreePokemon() {
-    cardContainer.innerHTML = ''
+    btn.style.display = 'none'
+    cardField.innerHTML = ''
     for (i = 0; i < 3; i++) {
         generatePokemon()
     }
@@ -70,16 +72,20 @@ function randomMove(json) {
 }
 
 function displayDexEntry(json) {
+    cardContainer.style.display = 'none'
+    pokedex.style.display = 'inline-block'
     dexImage.innerHTML = ""
     const pokedexSprite = document.createElement('img')
     pokedex.className = `pokeDex ${json.types[0].type.name}`
     dexName.innerText = `#${json.id}: ${capitalize(json.species.name)}`
     dexImage.appendChild(pokedexSprite)
     pokedexSprite.src = json.sprites.other['official-artwork'].front_default
+    pokedexSprite.title = "Click to find more Pokemon!"
     moveOne.textContent = `${capitalize(randomMove(json))}`
     moveTwo.textContent = `${capitalize(randomMove(json))}`
     moveThree.textContent = `${capitalize(randomMove(json))}`
     moveFour.textContent = `${capitalize(randomMove(json))}`
+    pokedex.addEventListener('click', () => {pokedex.style.display = 'none'; cardContainer.style.display = 'block'})
 }
 
 // pulling data from the API and populating the pokeCards
@@ -94,15 +100,16 @@ function generatePokemonCard(json) {
     pokeSprite.src = `${pickPokeSprite(json)}`
     pokeSprite.className = "sprite"
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
-    cardContainer.append(pokeCard)
+    cardField.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
     pokeCard.className = `card ${json.types[0].type.name}`
 
     catchButton.addEventListener( 'click', () => {
-        if (myTeam.childElementCount >= 6) {
+        if (myTeam.childElementCount > 4) {
             myTeam.firstChild.remove()
         }
-        pokeCard.className = `teamCard ${json.types[0].type.name}`    
+        btn.style.display = ""
+        pokeCard.className = `teamCard ${json.types[0].type.name}`
         pokeCard.removeChild(catchButton)
         pokeCard.removeChild(pokeTypes)
         pokeSprite.className = "ballSprite"
@@ -120,7 +127,7 @@ function generatePokemonCard(json) {
         releaseButton.addEventListener('click', () => {
             myTeam.removeChild(pokeCard)
         })
-        cardContainer.innerHTML = ''
+        cardField.innerHTML = ''
     })
 
 }
@@ -144,15 +151,17 @@ formPoke.addEventListener("submit", (event)=>{
         if (r.ok) {
             r.json().then(wantedPoke=>generateSearchPokemonCard(wantedPoke))
         } else {
-            cardContainer.innerText="This species of Pokemon hasn't been discovered yet! Try again!"
+            alert("This species of Pokemon hasn't been discovered yet! Try again!")
         }
         })
+        document.querySelector('.formTitle').style.display = 'inline-block'
+        document.querySelector('.formContainer').style.display = 'none'
         formPoke.reset()
     }
 )
 
   function generateSearchPokemonCard (wantedPoke){
-    cardContainer.innerHTML = ""
+    cardField.innerHTML = ""
     generatePokemonCard(wantedPoke)
   }  
 
@@ -176,12 +185,24 @@ function getStarters() {
     }
 }
 function starterCards() {
-    cardContainer.innerHTML = ''
+    cardField.innerHTML = ''
+    document.querySelector('.formTitle').style.display = 'block'
     starterIDsArray.forEach(starterObj=>{generatePokemonCard(starterObj)  
     })
 }
 
-const init = () => {getStarters()}
+function blankTeam() {
+    let i = 0
+    while (i < 3) {
+    const blankCard = document.createElement('div')
+    blankCard.className = 'teamCard'
+    blankCard.innerHTML = `<div class="teamCard"><img class='blankSprite' src='https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'></div>`
+    myTeam.append(blankCard)
+    i++
+    }
+}
+
+const init = () => {getStarters(), blankTeam()}
 
 
 document.addEventListener('DOMContentLoaded', init)
@@ -190,7 +211,11 @@ starterBtn.addEventListener('click', () => {
     starterBtn.style.display = "none"
     alert("Choose Wisely! You only get one!")
     starterCards()
-    btn.style.display = ""
+    cardContainer.style.display = "block"
 })
 
 const teamCard = document.querySelector('.teamCard')
+
+document.querySelector('.formTitle').addEventListener('click', (e) => {
+    document.querySelector('.formContainer').style.display = 'inline-block'; 
+    e.target.style.display = 'none'})
