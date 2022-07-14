@@ -50,6 +50,12 @@ function pickPokeSprite(json) {
     return pokeSpriteSource
 }
 
+function shinyGlow(pokeSprite, json) {
+    if (pokeSprite.src === json.sprites.front_shiny || json.sprites.front_female_shiny) {
+        pokeSprite.className = 'sprite shimmer'
+    } else {pokeSprite.className = 'sprite'}
+    return pokeSprite.className
+}
 // fetch pokemon
 function generatePokemon()  {
     fetch(`${url}/${getRandomInt()}`)
@@ -98,16 +104,14 @@ function generatePokemonCard(json) {
     catchButton.textContent = "I Choose You!"
     pokeName.innerText = capitalize(`${json.species.name}`)
     pokeSprite.src = `${pickPokeSprite(json)}`
-    pokeSprite.className = "sprite"
+    pokeSprite.className = shinyGlow(pokeSprite, json)
     json.types[1] ? pokeTypes.textContent = `${capitalize(json.types[0].type.name)}, ${capitalize(json.types[1].type.name)}` : pokeTypes.textContent = capitalize(`${json.types[0].type.name}`)
     cardField.append(pokeCard)
     pokeCard.append(pokeName, pokeSprite, pokeTypes, catchButton)
     pokeCard.className = `card ${json.types[0].type.name}`
 
     catchButton.addEventListener( 'click', () => {
-        if (myTeam.childElementCount > 4) {
-            myTeam.firstChild.remove()
-        }
+        myTeam.firstElementChild.remove()
         btn.style.display = ""
         pokeCard.className = `teamCard ${json.types[0].type.name}`
         pokeCard.removeChild(catchButton)
@@ -193,7 +197,7 @@ function starterCards() {
 
 function blankTeam() {
     let i = 0
-    while (i < 3) {
+    while (i < 6) {
     const blankCard = document.createElement('div')
     blankCard.className = 'teamCard'
     blankCard.innerHTML = `<div class="teamCard"><img class='blankSprite' src='https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'></div>`
