@@ -130,6 +130,10 @@ function generatePokemonCard(json) {
         pokeDexBtn.addEventListener('click', () => displayDexEntry(json))
         releaseButton.addEventListener('click', () => {
             myTeam.removeChild(pokeCard)
+            const blankCard = document.createElement('div')
+            blankCard.className = 'teamCard'
+            blankCard.innerHTML = `<div class="teamCard"><img class='blankSprite' src='https://www.clipartmax.com/png/full/129-1298536_pokeball-free-icon-pokeball-icon.png'></div>`
+            myTeam.prepend(blankCard)
         })
         cardField.innerHTML = ''
     })
